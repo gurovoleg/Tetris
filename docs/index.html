@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<title>Tetris</title>
+	<link href="css/all.css" rel="stylesheet">
+	<link href="css/main.css" rel="stylesheet">
+	<link href="webfonts/showcard-gothic.css" rel="stylesheet">
+	<link rel="shortcut icon" href="images/icons/tetris.png">
+</head>	
+<body>
+	<div class="container">
+
+		<div class="wrapper">
+			
+			<!-- уведомленния -->
+			<div id="notification" class="notification notification--show">Press Start</div>
+
+			<div id="info" class="info">
+				<!-- счет -->
+				<div><i class="fas fa-coins"></i> <span class="info-score" data-role="score">0</span></div>
+				<!-- запуск -->
+				<div id="start" class="info-start">start</div>
+				<!-- уровень -->
+				<div><i class="fas fa-thermometer-half"></i>  <span class="info-level" data-role="level">1</span></div>
+			</div>
+
+
+			<!-- игровое поле -->
+			<canvas id="canvas1" class="game-field"></canvas>
+			<canvas id="canvas2" class="help-block"></canvas>
+
+			<!-- управление -->
+			<div class="controls">
+				<div class="controls-movements">
+					<div id="left" class="button button--left"><i class="fas fa-angle-double-left"></i></div>
+					<div id="right" class="button"><i class="fas fa-angle-double-right"></i></div>	
+				</div>
+				<div id="rotate" class="button button--rotate"><i class="fas fa-sync-alt"></i></div>
+			</div>
+
+		</div>
+
+	</div>
+
+	<script src="js/getBlock.js"></script>
+	<script src="js/main.js"></script>
+</body>
+</html>
