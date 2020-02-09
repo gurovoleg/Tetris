@@ -1,6 +1,6 @@
 // const
-const CANVAS_WIDTH = 250
-const CANVAS_HEIGHT = 500
+let CANVAS_WIDTH = 300
+let CANVAS_HEIGHT = 600
 const CANVAS_BACKGROUND = '#ffffff'
 
 const ROWS_NUMBER = 20
@@ -16,6 +16,14 @@ let nextBlock
 let score = 0
 let level = 1
 let showHelpBlock = true
+
+function setCanvasSize () {
+	const screenHeight = document.documentElement.clientHeight
+	CANVAS_HEIGHT = screenHeight - screenHeight % 100 - 140
+	CANVAS_WIDTH = CANVAS_HEIGHT / 2
+}
+
+setCanvasSize()
 
 // Элементы
 const notification =  document.querySelector('#notification')
