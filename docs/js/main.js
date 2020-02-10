@@ -82,6 +82,7 @@ function clearCanvas1 () {
 	// context.rect(0, 0, canvas1.width, canvas1.height)	
 	// context.fill()
 	context.clearRect(0, 0, canvas1.width, canvas1.height)
+	// canvas1.width |= 0 тоде самое что canvas1.width = canvas1.width
 }
 
 // Рисуем фрагмент поля (часть фигуры)
@@ -125,7 +126,7 @@ function drawBlock () {
 }
 
 // Инициализация / Запуск
-function start () {
+function startGame () {
 	
 	mobileControls.classList.add('mobile-controls--show')
 	notification.classList.remove('notification--show')
@@ -174,10 +175,7 @@ function tick (timestamp) {
 			
 			// Проверяем есть ли место и заканчиваем игру
 			if (!canBlockExist(block)) {
-				showNotification('Game over')
-				mobileControls.classList.remove('mobile-controls--show')
-				gameStatus = null
-				startButton.textContent = 'start'
+				endGame()
 				return
 			}
 		}	
@@ -248,4 +246,11 @@ function getRandomFrom (array) {
 function showNotification(text) {
 	notification.textContent = text
 	notification.classList.add('notification--show')
+}
+
+function endGame () {
+	showNotification('Game over')
+	mobileControls.classList.remove('mobile-controls--show')
+	gameStatus = null
+	startButton.textContent = 'start'
 }

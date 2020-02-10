@@ -27,7 +27,7 @@ downControl.addEventListener('click', moveDown)
 
 startButton.addEventListener('click', () => {
 	if (gameStatus === null) {
-		start()
+		startGame()
 		gameStatus = 1
 		startButton.textContent = 'pause'		
 	} else if (gameStatus === 1) {
