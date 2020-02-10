@@ -13,6 +13,8 @@ let nextBlock // следующая фигура
 let score = 0 // счет
 let level = 1 // уровень
 let showHelpBlock = true // подсказка
+let requestId = null // для отмены анимации
+let gameStatus = null // 0 - paused, 1 - active
 
 // Элементы
 const notification =  document.querySelector('#notification')
@@ -49,7 +51,8 @@ function getDurationTime () {
 // Задаем размер игрового поля
 function setCanvasSize (element, offset = 20) {
 	const screenHeight = document.documentElement.clientHeight
-	element.height = screenHeight - element.offsetTop - offset
+	const coords = element.getBoundingClientRect()
+	element.height = screenHeight - coords.y - offset
 	element.width = parseInt(element.height / 2)
 }
 
@@ -123,6 +126,7 @@ function drawBlock () {
 
 // Инициализация / Запуск
 function start () {
+	
 	mobileControls.classList.add('mobile-controls--show')
 	notification.classList.remove('notification--show')
 	score = 0
@@ -172,6 +176,7 @@ function tick (timestamp) {
 			if (!canBlockExist(block)) {
 				showNotification('Game over')
 				mobileControls.classList.remove('mobile-controls--show')
+				gameStatus = null
 				return
 			}
 		}	
@@ -183,7 +188,7 @@ function tick (timestamp) {
 	drawBlock() // отрисовываем фигуру
 	drawState() // отрисовываем всю карту
 	
-	requestAnimationFrame(tick)
+	requestId = requestAnimationFrame(tick)
 }
 
 // Убираем полностью заполненные ряды

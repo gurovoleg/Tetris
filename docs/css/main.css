@@ -37,6 +37,7 @@ body {
 	color: #3F51B5;
 	transition: transform 0.2s;
 	position: absolute;
+	z-index: 3;
 	left: 50%;
 	transform: translateX(-50%);
 }
@@ -122,10 +123,9 @@ body {
 
 .mobile-controls {
 	display: none;
-	z-index: 10;
+	z-index: 2;
 	position: fixed;
 	top: 0; bottom: 0;
-	/*right:0; left: 0;*/
 	width: 100%;
 }
 
@@ -135,13 +135,11 @@ body {
 
 .mobile-controls_button {
 	height: 100%;
-	/*background: red;*/
 	/*border: 1px solid grey;*/
 }
 
 .mobile-controls_button--left, .mobile-controls_button--right {
 	width: 20%;
-	/*background: green;*/
 }
 
 .mobile-controls_middle {
@@ -153,7 +151,6 @@ body {
 }
 
 .mobile-controls_button--down {
-	/*background-color: blue;*/
 	height: 20%;
 }
 
@@ -162,8 +159,6 @@ body {
 @media (min-width: 992px) {
 	.info {font-size: 24px;}
 	.info-start {font-size: 26px;}
-  .button {font-size: 30px;}
-	.controls {display: none;}
 	.notification {font-size: 40px;}
 }
 

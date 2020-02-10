@@ -25,5 +25,20 @@ rightControl.addEventListener('click', moveRight)
 rotateControl.addEventListener('click', rotate)
 downControl.addEventListener('click', moveDown)
 
-startButton.addEventListener('click', start)
+startButton.addEventListener('click', () => {
+	if (gameStatus === null) {
+		start()
+		gameStatus = 1
+		startButton.textContent = 'pause'		
+	} else if (gameStatus === 1) {
+		cancelAnimationFrame(requestId)
+		gameStatus = 0
+		startButton.textContent = 'resume'
+	} else if (gameStatus === 0) {
+		tick()
+		gameStatus = 1
+		startButton.textContent = 'pause'
+	}
+})
+
 window.addEventListener('resize', () => setCanvasSize(canvas1))
