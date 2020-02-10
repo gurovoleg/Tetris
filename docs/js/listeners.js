@@ -1,3 +1,5 @@
+let intervalId = null
+
 // Определяем новую позицию
 function setBlockPosition (coord, value) {
 	const blockCopy = block.getCopy()
@@ -20,12 +22,19 @@ document.body.addEventListener ('keydown', (event) => {
 	if (event.code === 'ArrowDown') moveDown()
 })
 
-leftControl.addEventListener('click', moveLeft)
-rightControl.addEventListener('click', moveRight)
-rotateControl.addEventListener('click', rotate)
-downControl.addEventListener('click', moveDown)
+leftControl.addEventListener('touchstart', moveLeft)
+rightControl.addEventListener('touchstart', moveRight)
+rotateControl.addEventListener('touchstart', rotate)
+downControl.addEventListener('touchstart', () => intervalId = setInterval(moveDown, 50))
+downControl.addEventListener('touchend', () => clearInterval(intervalId))
 
-startButton.addEventListener('click', () => {
+startButton.addEventListener('click', startStopGame)
+notification.addEventListener('click', startStopGame)
+
+window.addEventListener('resize', () => setCanvasSize(canvas1))
+
+
+function startStopGame () {
 	if (gameStatus === null) {
 		startGame()
 		gameStatus = 1
@@ -39,6 +48,5 @@ startButton.addEventListener('click', () => {
 		gameStatus = 1
 		startButton.textContent = 'pause'
 	}
-})
+}
 
-window.addEventListener('resize', () => setCanvasSize(canvas1))
