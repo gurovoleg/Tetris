@@ -1,8 +1,5 @@
 // const
-let CANVAS_WIDTH = 300
-let CANVAS_HEIGHT = 600
 const CANVAS_BACKGROUND = '#ffffff'
-
 const ROWS_NUMBER = 20
 const COLS_NUMBER = 10
 const PADDING = 1
@@ -10,36 +7,33 @@ const PADDING = 1
 const START_BLOCKS = [1, 3, 6, 7, 10, 13, 19]
 const BLOCK_COLORS = ['#f44336', '#9C27B0', '#3F51B5', '#03A9F4', '#009688', '#8BC34A', '#FF9800', '#795548', '#607D8B' ]
 
-let map
-let block
-let nextBlock
-let score = 0
-let level = 1
-let showHelpBlock = true
-
-function setCanvasSize () {
-	const screenHeight = document.documentElement.clientHeight
-	CANVAS_HEIGHT = screenHeight - screenHeight % 100 - 140
-	CANVAS_WIDTH = CANVAS_HEIGHT / 2
-}
-
-setCanvasSize()
+let map // карта игрового поля
+let block // текущая фигура
+let nextBlock // следующая фигура
+let score = 0 // счет
+let level = 1 // уровень
+let showHelpBlock = true // подсказка
 
 // Элементы
 const notification =  document.querySelector('#notification')
 const startButton =  document.querySelector('#start')
+const mobileControls =  document.querySelector('#mobileControls')
 const leftControl =  document.querySelector('#left')
 const rightControl =  document.querySelector('#right')
 const rotateControl =  document.querySelector('#rotate')
+const downControl =  document.querySelector('#down')
 
-const fieldWidth = CANVAS_WIDTH / COLS_NUMBER
-const fieldHeight = CANVAS_HEIGHT / ROWS_NUMBER
-
+// Canvas1
 const canvas1 = document.querySelector("#canvas1")
-canvas1.width = CANVAS_WIDTH
-canvas1.height = CANVAS_HEIGHT
+setCanvasSize(canvas1)
 const context = canvas1.getContext('2d')
 
+// Задаем размеры блока игрового поля
+const fieldWidth = canvas1.width / COLS_NUMBER
+const fieldHeight = canvas1.height / ROWS_NUMBER
+
+
+// Canvas2
 const canvas2 = document.querySelector("#canvas2")
 canvas2.width = 40
 canvas2.height = 40
@@ -50,6 +44,13 @@ let durationTime = getDurationTime()
 // Расчитываем вермя падения в зависимости от уровня
 function getDurationTime () {
 	return 100 + 900 / level 
+}
+
+// Задаем размер игрового поля
+function setCanvasSize (element, offset = 20) {
+	const screenHeight = document.documentElement.clientHeight
+	element.height = screenHeight - element.offsetTop - offset
+	element.width = parseInt(element.height / 2)
 }
 
 // Отрисовывыем подсказку
@@ -75,9 +76,9 @@ function updateState () {
 // Очищаем поле
 function clearCanvas1 () {
 	// context.fillStyle = CANVAS_BACKGROUND
-	// context.rect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)	
+	// context.rect(0, 0, canvas1.width, canvas1.height)	
 	// context.fill()
-	context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
+	context.clearRect(0, 0, canvas1.width, canvas1.height)
 }
 
 // Рисуем фрагмент поля (часть фигуры)
@@ -122,7 +123,7 @@ function drawBlock () {
 
 // Инициализация / Запуск
 function start () {
-	
+	mobileControls.classList.add('mobile-controls--show')
 	notification.classList.remove('notification--show')
 	score = 0
 	level = 1
@@ -151,7 +152,7 @@ function tick (timestamp) {
 		if (canBlockExist(blockCopy)) {
 			block = blockCopy
 		} else {
-			saveBlock()
+			saveBlock() // сохраняем фигуру на игровом поле
 			const linesCount = clearLines()
 		
 			score = score + 100 * linesCount
@@ -160,7 +161,7 @@ function tick (timestamp) {
 			block = nextBlock
 			nextBlock = getBlock(getRandomFrom(START_BLOCKS), getRandomFrom(BLOCK_COLORS))
 
-			updateState() // обновляем инфу
+			updateState() // обновляем инфо блок
 			
 			// Показываем подсказку (следующий блок)
 			if (showHelpBlock) {
@@ -170,6 +171,7 @@ function tick (timestamp) {
 			// Проверяем есть ли место и заканчиваем игру
 			if (!canBlockExist(block)) {
 				showNotification('Game over')
+				mobileControls.classList.remove('mobile-controls--show')
 				return
 			}
 		}	
@@ -210,7 +212,7 @@ function saveBlock () {
 	}
 }
 
-// Можем ли поставить фигуру в данном месте
+// Можем ли поставить фигуру в данном месте на поле
 function canBlockExist (block) {
 	for (const part of block.getIncludedParts()) {
 		if (getField(part)) {
@@ -225,6 +227,7 @@ function getField ({ x, y }) {
 	return map[y] === undefined || map[y][x] === undefined || map[y][x]
 }
 
+// Задаем блок в общем поле
 function setField ({ x, y }, value) {
 	return map[y] === undefined || map[y][x] === undefined || (map[y][x] = value)
 }
@@ -240,31 +243,3 @@ function showNotification(text) {
 	notification.textContent = text
 	notification.classList.add('notification--show')
 }
-
-// Определяем новую позицию
-function setBlockPosition (coord, value) {
-	const blockCopy = block.getCopy()
-	blockCopy[coord] += value
-	if (canBlockExist(blockCopy)) {
-		block = blockCopy
-	}
-}
-
-const moveLeft = () => setBlockPosition('x', -1)
-const moveRight = () => setBlockPosition('x', 1)
-const moveDown = () => setBlockPosition('y', 1)
-const rotate = () => canBlockExist(block.getNextBlock()) ? block = block.getNextBlock() : null
-
-document.body.addEventListener ('keydown', (event) => {
-	if (event.code === 'ArrowLeft') moveLeft()
-	if (event.code === 'ArrowRight') moveRight()
-	if (event.code === 'ArrowUp') rotate()
-	if (event.code === 'ArrowDown') moveDown()
-})
-
-leftControl.addEventListener('click', moveLeft)
-rightControl.addEventListener('click', moveRight)
-rotateControl.addEventListener('click', rotate)
-canvas1.addEventListener('click', moveDown)
-
-startButton.addEventListener('click', start)

@@ -21,6 +21,7 @@ body {
 
 .info {
 	font-size: 16px;
+	line-height: 1;
 	color: grey;
 	display: flex;
 	justify-content: space-between;
@@ -118,6 +119,43 @@ body {
 	transform: translate(-50%, -50%) scale(1);
 }
 
+
+.mobile-controls {
+	display: none;
+	z-index: 10;
+	position: fixed;
+	top: 0; bottom: 0;
+	/*right:0; left: 0;*/
+	width: 100%;
+}
+
+.mobile-controls--show {
+	display: flex
+}
+
+.mobile-controls_button {
+	height: 100%;
+	/*background: red;*/
+	/*border: 1px solid grey;*/
+}
+
+.mobile-controls_button--left, .mobile-controls_button--right {
+	width: 20%;
+	/*background: green;*/
+}
+
+.mobile-controls_middle {
+	width: 60%;
+}
+
+.mobile-controls_button--rotate {
+	height: 80%;
+}
+
+.mobile-controls_button--down {
+	/*background-color: blue;*/
+	height: 20%;
+}
 
 
 /* Media queries */

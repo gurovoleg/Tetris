@@ -10,6 +10,17 @@
 	<link rel="shortcut icon" href="images/icons/tetris.png">
 </head>	
 <body>
+	
+	<!-- управление -->
+	<div id="mobileControls" class="mobile-controls">
+		<div id="left" class="mobile-controls_button mobile-controls_button--left"></div>
+		<div class="mobile-controls_middle">
+			<div id="rotate" class="mobile-controls_button mobile-controls_button--rotate"></div>
+			<div id="down" class="mobile-controls_button mobile-controls_button--down"></div>	
+		</div>
+		<div id="right" class="mobile-controls_button mobile-controls_button--right"></div>
+	</div>
+	
 	<div class="container">
 
 		<div class="wrapper">
@@ -31,20 +42,12 @@
 			<canvas id="canvas1" class="game-field"></canvas>
 			<canvas id="canvas2" class="help-block"></canvas>
 
-			<!-- управление -->
-			<div class="controls">
-				<div class="controls-movements">
-					<div id="left" class="button button--left"><i class="fas fa-angle-double-left"></i></div>
-					<div id="right" class="button"><i class="fas fa-angle-double-right"></i></div>	
-				</div>
-				<div id="rotate" class="button button--rotate"><i class="fas fa-sync-alt"></i></div>
-			</div>
-
 		</div>
 
 	</div>
 
 	<script src="js/getBlock.js"></script>
 	<script src="js/main.js"></script>
+	<script src="js/listeners.js"></script>
 </body>
 </html>
