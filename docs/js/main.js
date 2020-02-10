@@ -177,6 +177,7 @@ function tick (timestamp) {
 				showNotification('Game over')
 				mobileControls.classList.remove('mobile-controls--show')
 				gameStatus = null
+				startButton.textContent = 'start'
 				return
 			}
 		}	
