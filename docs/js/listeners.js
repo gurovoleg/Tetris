@@ -39,10 +39,13 @@ notification.addEventListener('click', startStopGame)
 
 // Обработчик клавиатры
 document.body.addEventListener ('keydown', (e) => {
-	if (e.code === 'ArrowLeft') moveLeft()
-	if (e.code === 'ArrowRight') moveRight()
-	if (e.code === 'ArrowUp') rotate()
-	if (e.code === 'ArrowDown') moveDown()
+	if (gameStatus === 1) {
+		if (e.code === 'ArrowLeft') moveLeft()
+		if (e.code === 'ArrowRight') moveRight()
+		if (e.code === 'ArrowUp') rotate()
+		if (e.code === 'ArrowDown') moveDown()
+	}
+	if (e.code === 'Enter') startStopGame()
 })
 
 // Обработчики touchscreen
