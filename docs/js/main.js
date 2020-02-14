@@ -254,14 +254,17 @@ function showNotification(text) {
 // Вибрация
 function vibrate(number = 1, value = 100) {
 	if("vibrate" in window.navigator) {
-		let count = 0
-		const timerId = setInterval(() => {
-			count ++
-			window.navigator.vibrate(value)
-			if (count === number) {
-				clearInterval(timerId)
-			}	
-		}, 100)
+		window.navigator.vibrate(value)
+		if (number > 1) {
+			let count = 0
+			const timerId = setInterval(() => {
+				count ++
+				window.navigator.vibrate(value)
+				if (count === number - 1) {
+					clearInterval(timerId)
+				}	
+			}, value)	
+		}
 	}
 }
 
