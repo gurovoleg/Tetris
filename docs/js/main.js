@@ -249,6 +249,9 @@ function showNotification(text) {
 }
 
 function endGame () {
+	if("vibrate" in window.navigator) {
+    window.navigator.vibrate(200);
+	}
 	showNotification('Game over')
 	mobileControls.classList.remove('mobile-controls--show')
 	gameStatus = null
