@@ -26,6 +26,8 @@ const leftControl =  document.querySelector('#left')
 const rightControl =  document.querySelector('#right')
 const rotateControl =  document.querySelector('#rotate')
 const downControl =  document.querySelector('#down')
+const scoreElement = document.querySelector('[data-role="score"]')
+const levelElement = document.querySelector('[data-role="level"]')
 
 // Canvas1
 const canvas1 = document.querySelector("#canvas1")
@@ -86,9 +88,20 @@ function drawHelpBlock () {
 
 // Обновляем информацию в шапке
 function updateState () {
-	const infoElement = document.querySelector('#info')
-	infoElement.querySelector('[data-role="score"]').textContent = score
-	infoElement.querySelector('[data-role="level"]').textContent = level
+	const newLevel = 1 + parseInt(score / 300) // каждые 300 очков увеличиваем уровень
+	
+	// Для анимации уровня и звукового соопровождения
+	if (newLevel > level) {
+		levelElement.classList.add('info-level--scale')
+		setTimeout(() => {
+			levelSound.play()
+			levelElement.classList.remove('info-level--scale')	
+		},500)
+		level = newLevel
+	}
+
+	scoreElement.textContent = score
+	levelElement.textContent = level
 }
 
 // Очищаем поле
@@ -142,7 +155,7 @@ function drawBlock () {
 
 // Запуск
 function startGame () {
-	
+	startSound.play()
 	mobileControls.classList.add('mobile-controls--show')
 	notification.classList.remove('notification--show')
 	score = 0
@@ -172,19 +185,21 @@ function tick (timestamp) {
 		if (canBlockExist(blockCopy)) {
 			block = blockCopy
 		} else {
+			// landingSound.play()
 			saveBlock() // сохраняем фигуру на игровом поле
 			const linesCount = clearLines()
 			if (linesCount > 0) {
 		    vibrate(1, 300)
+		    clearSound.play()
 			}
 		
 			score = score + 100 * linesCount
-			level = 1 + parseInt(score / 300)
-
+			updateState() // обновляем инфо блок
+			
 			block = nextBlock
 			nextBlock = getBlock(getRandomFrom(START_BLOCKS), getRandomFrom(BLOCK_COLORS))
 
-			updateState() // обновляем инфо блок
+
 			
 			// Показываем подсказку (следующий блок)
 			if (showHelpBlock) {
@@ -285,7 +300,8 @@ function vibrate(number = 1, value = 200) {
 
 // Конец игры
 function endGame () {
-  vibrate(2, 300);
+  vibrate(2, 300)
+  gameoverSound.play()
 	showNotification('Game over')
 	mobileControls.classList.remove('mobile-controls--show')
 	gameStatus = null
@@ -293,4 +309,3 @@ function endGame () {
 }
 
 init ()
-

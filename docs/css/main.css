@@ -57,6 +57,12 @@ body {
 
 .info-level {
 	color:#f44336;
+	transition: transform 0.5s;
+	display: inline-block;
+}
+
+.info-level--scale {
+	transform: scale(1.2);
 }
 
 .help-block {

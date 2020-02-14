@@ -23,6 +23,7 @@ function setBlockPosition (coord, value) {
 	blockCopy[coord] += value
 	if (canBlockExist(blockCopy)) {
 		block = blockCopy
+		moveSound.play()
 	}
 }
 
@@ -30,7 +31,12 @@ function setBlockPosition (coord, value) {
 const moveLeft = () => setBlockPosition('x', -1)
 const moveRight = () => setBlockPosition('x', 1)
 const moveDown = () => setBlockPosition('y', 1)
-const rotate = () => canBlockExist(block.getNextBlock()) ? block = block.getNextBlock() : null
+const rotate = () => {
+	if (canBlockExist(block.getNextBlock())) {
+		block = block.getNextBlock() 
+		rotateSound.play()
+	}
+}
 
 window.addEventListener('resize', init)
 
