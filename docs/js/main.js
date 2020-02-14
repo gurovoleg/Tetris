@@ -148,19 +148,6 @@ function startGame () {
 	requestAnimationFrame(tick)
 }
 
-function vibrate(number = 1, value = 100) {
-	if("vibrate" in window.navigator) {
-		let count = 0
-		const timerId = setInterval(() => {
-			count ++
-			window.navigator.vibrate(value)
-			if (count === number) {
-				clearInterval(timerId)
-			}	
-		}, 1000)
-	}
-}
-
 // Обновляем экран
 function tick (timestamp) {
 	if (timestamp >= durationTime) {
@@ -173,7 +160,7 @@ function tick (timestamp) {
 			saveBlock() // сохраняем фигуру на игровом поле
 			const linesCount = clearLines()
 			if(linesCount > 0) {
-		    vibrate()
+		    vibrate(1, 300)
 			}
 		
 			score = score + 100 * linesCount
@@ -264,10 +251,27 @@ function showNotification(text) {
 	notification.classList.add('notification--show')
 }
 
+// Вибрация
+function vibrate(number = 1, value = 100) {
+	if("vibrate" in window.navigator) {
+		let count = 0
+		const timerId = setInterval(() => {
+			count ++
+			window.navigator.vibrate(value)
+			if (count === number) {
+				clearInterval(timerId)
+			}	
+		}, 100)
+	}
+}
+
+// Конец игры
 function endGame () {
-  vibrate(3, 200);
+  vibrate(2, 300);
 	showNotification('Game over')
 	mobileControls.classList.remove('mobile-controls--show')
 	gameStatus = null
 	startButton.textContent = 'start'
 }
+
+
