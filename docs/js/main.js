@@ -9,12 +9,14 @@ const BLOCK_COLORS = ['#f44336', '#9C27B0', '#3F51B5', '#03A9F4', '#009688', '#8
 
 let map // карта игрового поля
 let block // текущая фигура
-let nextBlock // следующая фигура
+let nextBlock // следующая фигура (для подсказки)
 let score = 0 // счет
 let level = 1 // уровень
-let showHelpBlock = true // подсказка
+let showHelpBlock = true // индикатор подсказки
 let requestId = null // для отмены анимации
 let gameStatus = null // 0 - paused, 1 - active
+let fieldWidth // ширина блока игрового поля
+let fieldHeight // высота блока игрового поля
 
 // Элементы
 const notification =  document.querySelector('#notification')
@@ -27,13 +29,7 @@ const downControl =  document.querySelector('#down')
 
 // Canvas1
 const canvas1 = document.querySelector("#canvas1")
-setCanvasSize(canvas1)
 const context = canvas1.getContext('2d')
-
-// Задаем размеры блока игрового поля
-const fieldWidth = canvas1.width / COLS_NUMBER
-const fieldHeight = canvas1.height / ROWS_NUMBER
-
 
 // Canvas2
 const canvas2 = document.querySelector("#canvas2")
@@ -43,9 +39,18 @@ const context2 = canvas2.getContext('2d')
 
 let durationTime = getDurationTime()
 
-// Расчитываем вермя падения в зависимости от уровня
+// Расчитываем время падения (в зависимости от уровня)
 function getDurationTime () {
 	return 100 + 900 / level 
+}
+
+// Инициализация
+function init () {
+	setCanvasSize(canvas1)	
+	// Задаем размеры блока игрового поля
+	fieldWidth = canvas1.width / COLS_NUMBER
+	fieldHeight = canvas1.height / ROWS_NUMBER
+	setControlsSize()
 }
 
 // Задаем размер игрового поля
@@ -56,7 +61,17 @@ function setCanvasSize (element, offset = 20) {
 	element.width = parseInt(element.height / 2)
 }
 
-// Отрисовывыем подсказку
+// Задаем размеры элементов управления
+function setControlsSize () {
+	const middleControl =  mobileControls.querySelector('#middle')
+	const screenWidth = document.documentElement.clientWidth
+
+	middleControlWidth = canvas1.width * 0.7
+	middleControl.style.width = middleControlWidth + 'px'
+	leftControl.style.width = rightControl.style.width = (screenWidth - middleControlWidth) / 2 + 'px' 
+}
+
+// Отрисовывыем блок с подсказкой
 function drawHelpBlock () {
 	context2.clearRect(0, 0, canvas2.width, canvas2.height)
 
@@ -69,7 +84,7 @@ function drawHelpBlock () {
 	}
 }
 
-// Обновляем информацию
+// Обновляем информацию в шапке
 function updateState () {
 	const infoElement = document.querySelector('#info')
 	infoElement.querySelector('[data-role="score"]').textContent = score
@@ -125,7 +140,7 @@ function drawBlock () {
 	}
 }
 
-// Инициализация / Запуск
+// Запуск
 function startGame () {
 	
 	mobileControls.classList.add('mobile-controls--show')
@@ -277,4 +292,5 @@ function endGame () {
 	startButton.textContent = 'start'
 }
 
+init ()
 

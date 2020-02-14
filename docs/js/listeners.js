@@ -32,7 +32,7 @@ const moveRight = () => setBlockPosition('x', 1)
 const moveDown = () => setBlockPosition('y', 1)
 const rotate = () => canBlockExist(block.getNextBlock()) ? block = block.getNextBlock() : null
 
-window.addEventListener('resize', () => setCanvasSize(canvas1))
+window.addEventListener('resize', init)
 
 startButton.addEventListener('click', startStopGame)
 notification.addEventListener('click', startStopGame)
@@ -47,6 +47,8 @@ document.body.addEventListener ('keydown', (e) => {
 	}
 	if (e.code === 'Enter') startStopGame()
 })
+
+document.body.addEventListener ('wheel', rotate)
 
 // Обработчики touchscreen events
 touchHandler(leftControl, moveLeft)
@@ -66,11 +68,11 @@ function touchHandler (control, fn, duration = 50) {
 	})
 }
 
-// Бросаем до упора вниз
+// Бросаем до упора вниз (для свайпа)
 function fallDown () {
 	const intervalId = setInterval(() => {
 		const blockCopy = block.getCopy()
-		blockCopy['y'] += 1
+		blockCopy['y'] += 2
 		if (canBlockExist(blockCopy)) {
 			block = blockCopy
 		} else {
