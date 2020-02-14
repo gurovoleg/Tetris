@@ -48,11 +48,12 @@ document.body.addEventListener ('keydown', (e) => {
 	if (e.code === 'Enter') startStopGame()
 })
 
-// Обработчики touchscreen
+// Обработчики touchscreen events
 touchHandler(leftControl, moveLeft)
 touchHandler(rightControl, moveRight)
 touchHandler(downControl, moveDown)
 
+// Обработчик нажатий с удержанием
 function touchHandler (control, fn, duration = 50) {
 	control.addEventListener('touchstart', (e) => {
 		e.preventDefault()
@@ -65,12 +66,25 @@ function touchHandler (control, fn, duration = 50) {
 	})
 }
 
-// Функция обработки нажатий для середины экрана
+// Бросаем до упора вниз
+function fallDown () {
+	const intervalId = setInterval(() => {
+		const blockCopy = block.getCopy()
+		blockCopy['y'] += 1
+		if (canBlockExist(blockCopy)) {
+			block = blockCopy
+		} else {
+			clearInterval(intervalId)
+		}
+	}, 50)	
+}
+
+// Обработчик нажатий для середины экрана
 onSwipeHandler({ 
 	element: rotateControl,
 	left: moveLeft,
 	right: moveRight,
 	noswipe: rotate,
-	down: moveDown
+	down: fallDown
 })
 
