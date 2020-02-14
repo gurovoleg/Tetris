@@ -159,7 +159,7 @@ function tick (timestamp) {
 		} else {
 			saveBlock() // сохраняем фигуру на игровом поле
 			const linesCount = clearLines()
-			if(linesCount > 0) {
+			if (linesCount > 0) {
 		    vibrate(1, 300)
 			}
 		
@@ -252,7 +252,7 @@ function showNotification(text) {
 }
 
 // Вибрация
-function vibrate(number = 1, value = 100) {
+function vibrate(number = 1, value = 200) {
 	if("vibrate" in window.navigator) {
 		window.navigator.vibrate(value)
 		if (number > 1) {

@@ -49,24 +49,28 @@ document.body.addEventListener ('keydown', (e) => {
 })
 
 // Обработчики touchscreen
-leftControl.addEventListener('touchstart', moveLeft)
-rightControl.addEventListener('touchstart', moveRight)
-// rotateControl.addEventListener('touchstart', rotate)
+touchHandler(leftControl, moveLeft)
+touchHandler(rightControl, moveRight)
+touchHandler(downControl, moveDown)
 
-downControl.addEventListener('touchstart', (e) => {
-	e.preventDefault()
-	e.stopPropagation()
-	intervalId = setInterval(moveDown, 50)
-})
-downControl.addEventListener('touchend', () => {
-	clearInterval(intervalId)
-})
+function touchHandler (control, fn, duration = 50) {
+	control.addEventListener('touchstart', (e) => {
+		e.preventDefault()
+		e.stopPropagation()
+		const intervalId = setInterval(fn, duration)
+
+		control.addEventListener('touchend', () => {
+			clearInterval(intervalId)
+		})
+	})
+}
 
 // Функция обработки нажатий для середины экрана
 onSwipeHandler({ 
 	element: rotateControl,
 	left: moveLeft,
 	right: moveRight,
-	noswipe: rotate
+	noswipe: rotate,
+	down: moveDown
 })
 
