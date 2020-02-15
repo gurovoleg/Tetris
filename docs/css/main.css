@@ -21,26 +21,29 @@ body {
 
 .settings {
 	position: absolute;
+	left: -50px;
 	z-index: 3;
 	padding: 5px 15px;
 }
 
-.volume {
+.settings__control {
 	display: none;
 	font-size: 16px;
 	cursor: pointer;
+	margin-bottom: 10px;
+	min-width: 30px;
 }
 
-.volume-on {
+.settings__control--show {
+	display: block;
+}
+
+.settings__control--on {
 	color: #009688;
 }
 
-.volume-off {
-	color: grey;
-}
-
-.volume--show {
-	display: block;
+.settings__control--off {
+	color: rgba(128, 128, 128, 0.5);
 }
 
 .info {
@@ -148,13 +151,16 @@ body {
 	width: 100%;
 }
 
+.mobile-controls--show-lines {
+	/* используем в паре с mobile-controls_button для отображения направляющих */
+}
+
 .mobile-controls--show {
 	display: flex
 }
 
-.mobile-controls_button {
-	height: 100%;
-	/*border: 1px solid grey;*/
+.mobile-controls--show-lines .mobile-controls_button {
+	border: 1px dashed rgba(128, 128, 128, 0.2);
 }
 
 .mobile-controls_button--left, .mobile-controls_button--right {
@@ -176,7 +182,7 @@ body {
 
 /* Media queries */
 @media (min-width: 992px) {
-	.volume {font-size: 24px;}
+	.settings__control {font-size: 24px;}
 	.info {font-size: 24px;}
 	.info-start {font-size: 26px;}
 	.notification {font-size: 40px;}

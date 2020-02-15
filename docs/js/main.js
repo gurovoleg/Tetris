@@ -13,11 +13,13 @@ let nextBlock // следующая фигура (для подсказки)
 let score = 0 // счет
 let level = 1 // уровень
 let showHelpBlock = true // индикатор подсказки
+let showControlLayout = false // индикатор направляющих областей управления 
 let requestId = null // для отмены анимации
 let gameStatus = null // 0 - paused, 1 - active
 let fieldWidth // ширина блока игрового поля
 let fieldHeight // высота блока игрового поля
 const levelUpdateValue = 300 // Количество очков для смены уровня
+
 
 // Элементы
 const notification =  document.querySelector('#notification')
@@ -29,7 +31,12 @@ const rotateControl =  document.querySelector('#rotate')
 const downControl =  document.querySelector('#down')
 const scoreElement = document.querySelector('[data-role="score"]')
 const levelElement = document.querySelector('[data-role="level"]')
-const volumeControl = document.querySelector('#settings-volume')
+const volumeControl = document.querySelector('#settingsVolume')
+const helpControl = document.querySelector('#settingsHelpBlock')
+const layoutControl = document.querySelector('#settingsLayout')
+
+// Классы
+const showControl = 'settings__control--show'
 
 // Canvas1
 const canvas1 = document.querySelector("#canvas1")
@@ -78,7 +85,7 @@ function setControlsSize () {
 // Отрисовывыем блок с подсказкой
 function drawHelpBlock () {
 	context2.clearRect(0, 0, canvas2.width, canvas2.height)
-
+	
 	const nextBlockCopy = nextBlock.getCopy()
 	nextBlockCopy.x = 1
 	nextBlockCopy.y = 1
@@ -88,7 +95,7 @@ function drawHelpBlock () {
 	}
 }
 
-// Обновляем информацию в шапке
+// Обновляем панель информации и настройки
 function updateState () {
 	const newLevel = 1 + parseInt(score / levelUpdateValue) // каждые 300 очков увеличиваем уровень
 	
@@ -106,13 +113,27 @@ function updateState () {
 	scoreElement.textContent = score
 	levelElement.textContent = level
 
-	// Индикатор
-	if (volumeEnabled) {
-		volumeControl.querySelector('.volume-on').classList.add('volume--show')
-		volumeControl.querySelector('.volume-off').classList.remove('volume--show')
+	// Индикаторы настроек (звук, подсказка, направляющие областей управления)
+	updateControlView(volumeControl, showControl, volumeEnabled)
+	updateControlView(helpControl, showControl, showHelpBlock)
+	updateControlView(layoutControl, showControl, showControlLayout)
+	
+	// Включить / выключить вспомогательные линии
+	if (showControlLayout) {
+		mobileControls.classList.add('mobile-controls--show-lines')
 	} else {
-		volumeControl.querySelector('.volume-on').classList.remove('volume--show')
-		volumeControl.querySelector('.volume-off').classList.add('volume--show')
+		mobileControls.classList.remove('mobile-controls--show-lines')
+	}
+}
+
+// Показываем / скрываем контролы в настройках
+function updateControlView (control, className, value) {
+	if (value) {
+		control.firstElementChild.classList.add(className)
+		control.lastElementChild.classList.remove(className)	
+	} else {
+		control.firstElementChild.classList.remove(className)
+		control.lastElementChild.classList.add(className)	
 	}
 }
 
@@ -220,6 +241,8 @@ function tick (timestamp) {
 			// Показываем подсказку (следующий блок)
 			if (showHelpBlock) {
 				drawHelpBlock() 	
+			} else {
+				canvas2.width |= 0
 			}
 			
 			// Проверяем есть ли место и заканчиваем игру

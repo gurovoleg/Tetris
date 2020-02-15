@@ -95,9 +95,28 @@ onSwipeHandler({
 	down: fallDown
 })
 
-// Управление звуком
-volumeControl.addEventListener('click', () => {
+// Управление настройками
+
+// Звук
+volumeControl.addEventListener('click', (e) => {
+	console.log(volumeControl)
+	e.stopPropagation()
 	volumeEnabled = !volumeEnabled
 	updateState()
 })
 
+// Подсказка
+helpControl.addEventListener('click', (e) => {
+	console.log(helpControl)
+	e.stopPropagation()
+	showHelpBlock = !showHelpBlock
+	updateState()
+})
+
+// Направляющие областей управления
+layoutControl.addEventListener('click', (e) => {
+	console.log(layoutControl)
+	e.stopPropagation()
+	showControlLayout = !showControlLayout
+	updateState()
+})
