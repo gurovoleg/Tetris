@@ -28,6 +28,7 @@ const rotateControl =  document.querySelector('#rotate')
 const downControl =  document.querySelector('#down')
 const scoreElement = document.querySelector('[data-role="score"]')
 const levelElement = document.querySelector('[data-role="level"]')
+const volumeControl = document.querySelector('#settings-volume')
 
 // Canvas1
 const canvas1 = document.querySelector("#canvas1")
@@ -90,11 +91,12 @@ function drawHelpBlock () {
 function updateState () {
 	const newLevel = 1 + parseInt(score / 300) // каждые 300 очков увеличиваем уровень
 	
-	// Для анимации уровня и звукового соопровождения
+	// Увеличение уровня сложности (анимация и звуковое соопровождения)
 	if (newLevel > level) {
 		levelElement.classList.add('info-level--scale')
 		setTimeout(() => {
 			levelSound.play()
+			showNotification('Level up!', 500)
 			levelElement.classList.remove('info-level--scale')	
 		},500)
 		level = newLevel
@@ -102,6 +104,15 @@ function updateState () {
 
 	scoreElement.textContent = score
 	levelElement.textContent = level
+
+	// Индикатор
+	if (volumeEnabled) {
+		volumeControl.querySelector('.volume-on').classList.add('volume--show')
+		volumeControl.querySelector('.volume-off').classList.remove('volume--show')
+	} else {
+		volumeControl.querySelector('.volume-on').classList.remove('volume--show')
+		volumeControl.querySelector('.volume-off').classList.add('volume--show')
+	}
 }
 
 // Очищаем поле
@@ -185,22 +196,23 @@ function tick (timestamp) {
 		if (canBlockExist(blockCopy)) {
 			block = blockCopy
 		} else {
-			// landingSound.play()
 			saveBlock() // сохраняем фигуру на игровом поле
+
 			const linesCount = clearLines()
 			if (linesCount > 0) {
 		    vibrate(1, 300)
 		    clearSound.play()
+	    	if (linesCount > 2) {
+	        showNotification('Welldone!', 500)
+	    	}
 			}
-		
+					
 			score = score + 100 * linesCount
 			updateState() // обновляем инфо блок
 			
 			block = nextBlock
 			nextBlock = getBlock(getRandomFrom(START_BLOCKS), getRandomFrom(BLOCK_COLORS))
 
-
-			
 			// Показываем подсказку (следующий блок)
 			if (showHelpBlock) {
 				drawHelpBlock() 	
@@ -276,9 +288,14 @@ function getRandomFrom (array) {
 }
 
 // Показ уведомления
-function showNotification(text) {
+function showNotification(text, hideTimeout = 0) {
 	notification.textContent = text
 	notification.classList.add('notification--show')
+	if (hideTimeout) {
+		setTimeout(() => {
+			notification.classList.remove('notification--show')
+		}, hideTimeout)
+	}
 }
 
 // Вибрация

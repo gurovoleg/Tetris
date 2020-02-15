@@ -1,5 +1,3 @@
-let intervalId = null
-
 // Пуск/Стоп игры
 function startStopGame () {
 	if (gameStatus === null) {
@@ -32,7 +30,7 @@ const moveLeft = () => setBlockPosition('x', -1)
 const moveRight = () => setBlockPosition('x', 1)
 const moveDown = () => setBlockPosition('y', 1)
 const rotate = () => {
-	if (canBlockExist(block.getNextBlock())) {
+	if (block && canBlockExist(block.getNextBlock())) {
 		block = block.getNextBlock() 
 		rotateSound.play()
 	}
@@ -81,6 +79,7 @@ function fallDown () {
 		blockCopy['y'] += 2
 		if (canBlockExist(blockCopy)) {
 			block = blockCopy
+			moveSound.play()
 		} else {
 			clearInterval(intervalId)
 		}
@@ -94,5 +93,12 @@ onSwipeHandler({
 	right: moveRight,
 	noswipe: rotate,
 	down: fallDown
+})
+
+
+// Управление звуком
+volumeControl.addEventListener('click', () => {
+	volumeEnabled = !volumeEnabled
+	updateState()
 })
 

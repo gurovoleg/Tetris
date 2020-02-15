@@ -19,6 +19,30 @@ body {
 	display: inline-block;
 }
 
+.settings {
+	position: absolute;
+	z-index: 3;
+	padding: 5px 15px;
+}
+
+.volume {
+	display: none;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.volume-on {
+	color: #009688;
+}
+
+.volume-off {
+	color: grey;
+}
+
+.volume--show {
+	display: block;
+}
+
 .info {
 	font-size: 16px;
 	line-height: 1;
@@ -72,18 +96,6 @@ body {
 
 .game-field {
 	box-shadow: 0 0 20px 2px rgba(0,0,0,0.1)
-}
-
-.controls {
-	display: flex;
-	justify-content: space-between;
-	margin-top: 10px;
-	/*padding: 10px 0px 10px 0px;*/
-	box-shadow: 0 0 20px 2px rgba(0,0,0,0.1);
-}
-
-.controls-movements {
-	display: flex;
 }
 
 .button {
@@ -163,6 +175,7 @@ body {
 
 /* Media queries */
 @media (min-width: 992px) {
+	.volume {font-size: 24px;}
 	.info {font-size: 24px;}
 	.info-start {font-size: 26px;}
 	.notification {font-size: 40px;}
