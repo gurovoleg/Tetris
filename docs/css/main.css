@@ -130,11 +130,12 @@ body {
 	text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 0px 5px 5px rgba(0, 0, 0, 0.5);
 	position: absolute;
 	top: 50%; left: 50%;
-	transform: translate(-50%, -50%) scale(0);
-	transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.175);
+	transform: translate(-50%, -50%) scale(0); /* убираем */
+	transition: all 0.2s ease-in;
 }
 
 .notification--show {
+	transition: transform 0.3s cubic-bezier(.17,.67,.43,2.0); /* показываем */
 	transform: translate(-50%, -50%) scale(1);
 }
 

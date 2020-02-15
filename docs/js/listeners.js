@@ -95,7 +95,6 @@ onSwipeHandler({
 	down: fallDown
 })
 
-
 // Управление звуком
 volumeControl.addEventListener('click', () => {
 	volumeEnabled = !volumeEnabled

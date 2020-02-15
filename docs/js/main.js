@@ -17,6 +17,7 @@ let requestId = null // для отмены анимации
 let gameStatus = null // 0 - paused, 1 - active
 let fieldWidth // ширина блока игрового поля
 let fieldHeight // высота блока игрового поля
+const levelUpdateValue = 300 // Количество очков для смены уровня
 
 // Элементы
 const notification =  document.querySelector('#notification')
@@ -89,7 +90,7 @@ function drawHelpBlock () {
 
 // Обновляем информацию в шапке
 function updateState () {
-	const newLevel = 1 + parseInt(score / 300) // каждые 300 очков увеличиваем уровень
+	const newLevel = 1 + parseInt(score / levelUpdateValue) // каждые 300 очков увеличиваем уровень
 	
 	// Увеличение уровня сложности (анимация и звуковое соопровождения)
 	if (newLevel > level) {
@@ -203,7 +204,10 @@ function tick (timestamp) {
 		    vibrate(1, 300)
 		    clearSound.play()
 	    	if (linesCount > 2) {
-	        showNotification('Welldone!', 500)
+	        showNotification(`${linesCount} lines! Amazing!`, 700)
+	        gameoverSound.play()
+	    	} else if (linesCount > 1) {
+	        showNotification(`${linesCount} lines! Welldone!`, 700)
 	    	}
 			}
 					
@@ -287,17 +291,6 @@ function getRandomFrom (array) {
 	return array[random]
 }
 
-// Показ уведомления
-function showNotification(text, hideTimeout = 0) {
-	notification.textContent = text
-	notification.classList.add('notification--show')
-	if (hideTimeout) {
-		setTimeout(() => {
-			notification.classList.remove('notification--show')
-		}, hideTimeout)
-	}
-}
-
 // Вибрация
 function vibrate(number = 1, value = 200) {
 	if("vibrate" in window.navigator) {
@@ -326,3 +319,4 @@ function endGame () {
 }
 
 init ()
+
