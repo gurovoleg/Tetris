@@ -117,6 +117,6 @@ helpControl.addEventListener('click', (e) => {
 layoutControl.addEventListener('click', (e) => {
 	console.log(layoutControl)
 	e.stopPropagation()
-	showControlLayout = !showControlLayout
+	showControlsLayout = !showControlsLayout
 	updateState()
 })

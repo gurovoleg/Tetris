@@ -13,7 +13,7 @@ let nextBlock // следующая фигура (для подсказки)
 let score = 0 // счет
 let level = 1 // уровень
 let showHelpBlock = true // индикатор подсказки
-let showControlLayout = false // индикатор направляющих областей управления 
+let showControlsLayout = false // индикатор вспомогательных линии областей управления 
 let requestId = null // для отмены анимации
 let gameStatus = null // 0 - paused, 1 - active
 let fieldWidth // ширина блока игрового поля
@@ -113,13 +113,13 @@ function updateState () {
 	scoreElement.textContent = score
 	levelElement.textContent = level
 
-	// Индикаторы настроек (звук, подсказка, направляющие областей управления)
+	// Индикаторы настроек (звук, подсказка, вспомогательные линии областей управления)
 	updateControlView(volumeControl, showControl, volumeEnabled)
 	updateControlView(helpControl, showControl, showHelpBlock)
-	updateControlView(layoutControl, showControl, showControlLayout)
+	updateControlView(layoutControl, showControl, showControlsLayout)
 	
 	// Включить / выключить вспомогательные линии
-	if (showControlLayout) {
+	if (showControlsLayout) {
 		mobileControls.classList.add('mobile-controls--show-lines')
 	} else {
 		mobileControls.classList.remove('mobile-controls--show-lines')
