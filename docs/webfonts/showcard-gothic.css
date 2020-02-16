@@ -1,6 +1,7 @@
 @font-face {
     font-family: 'Showcard Gothic';
-    src: url('SHOWG.TTF') format('truetype');
+    src: url('showcard.otf');
+    /*src: url('SHOWG.TTF') format('truetype');*/
     font-weight: 400;
     font-style: normal;
 }

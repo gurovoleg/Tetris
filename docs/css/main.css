@@ -219,6 +219,7 @@ body {
 
 .mobile-controls-description__text {
 	font-size: 12px;
+	margin-bottom: 5px;
 	color: rgba(128, 128, 128, 0.2);	
 }
 

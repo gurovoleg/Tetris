@@ -3,15 +3,15 @@ function startStopGame () {
 	if (gameStatus === null) {
 		startGame()
 		gameStatus = 1
-		startButton.textContent = 'pause'		
+		startButton.textContent = 'пауза'		
 	} else if (gameStatus === 1) {
 		cancelAnimationFrame(requestId)
 		gameStatus = 0
-		startButton.textContent = 'resume'
+		startButton.textContent = 'старт'
 	} else if (gameStatus === 0) {
 		tick()
 		gameStatus = 1
-		startButton.textContent = 'pause'
+		startButton.textContent = 'пауза'
 	}
 }
 

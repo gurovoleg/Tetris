@@ -335,7 +335,7 @@ function endGame () {
 	showNotification('Game over')
 	mobileControls.classList.remove('mobile-controls--above')
 	gameStatus = null
-	startButton.textContent = 'start'
+	startButton.textContent = 'старт'
 }
 
 init ()
