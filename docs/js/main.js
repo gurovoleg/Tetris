@@ -25,6 +25,7 @@ const levelUpdateValue = 300 // Количество очков для смен�
 const notification =  document.querySelector('#notification')
 const startButton =  document.querySelector('#start')
 const mobileControls =  document.querySelector('#mobileControls')
+const mobileControlsDescription =  document.querySelector('#mobileControlsDescription')
 const leftControl =  document.querySelector('#left')
 const rightControl =  document.querySelector('#right')
 const rotateControl =  document.querySelector('#rotate')
@@ -36,7 +37,7 @@ const helpControl = document.querySelector('#settingsHelpBlock')
 const layoutControl = document.querySelector('#settingsLayout')
 
 // Классы
-const showControl = 'settings__control--show'
+const showControl = 'd-block'
 
 // Canvas1
 const canvas1 = document.querySelector("#canvas1")
@@ -123,8 +124,10 @@ function updateState () {
 	// Включить / выключить вспомогательные линии
 	if (showControlsLayout) {
 		mobileControls.classList.add('mobile-controls--show-lines')
+		mobileControlsDescription.classList.add(showControl)
 	} else {
 		mobileControls.classList.remove('mobile-controls--show-lines')
+		mobileControlsDescription.classList.remove(showControl)
 	}
 }
 

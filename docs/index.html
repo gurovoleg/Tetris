@@ -12,7 +12,7 @@
 <body>
 
 	<!-- управление -->
-	<div id="mobileControls" class="mobile-controls">
+	<div id="mobileControls" class="mobile-controls mobile-controls--show-lines">
 		<div id="left" class="mobile-controls_button mobile-controls_button--left"></div>
 		<div id="middle" class="mobile-controls_middle">
 			<div id="rotate" class="mobile-controls_button mobile-controls_button--rotate"></div>
@@ -41,20 +41,32 @@
 			<!-- настройки -->
 			<div class="settings">
 				<div id="settingsVolume">
-					<div class="settings__control settings__control--on settings__control--show"><i class="fas fa-volume-up"></i></div>
+					<div class="settings__control settings__control--on d-block"><i class="fas fa-volume-up"></i></div>
 					<div class="settings__control settings__control--off"><i class="fas fa-volume-mute"></i></div>	
 				</div>
 				<div id="settingsHelpBlock">
-					<div class="settings__control settings__control--on settings__control--show"><i class="fas fa-eye"></i></div>
+					<div class="settings__control settings__control--on d-block"><i class="fas fa-eye"></i></div>
 					<div class="settings__control settings__control--off"><i class="fas fa-eye-slash"></i></div>	
 				</div>
 				<div id="settingsLayout">
-					<div class="settings__control settings__control--on settings__control--show"><i class="fas fa-border-style"></i></div>
+					<div class="settings__control settings__control--on d-block"><i class="fas fa-border-style"></i></div>
 					<div class="settings__control settings__control--off"><i class="fas fa-border-none"></i></div>
 				</div>
 			</div>
-			
 
+			<!-- описание работы контролов -->
+			<div id="mobileControlsDescription" class="mobile-controls-description d-block">
+				
+				<div class="mobile-controls-description__title">Use middle area to:</div>
+				<div class="mobile-controls-description__text">swipe left, right to move</div>
+				<div class="mobile-controls-description__text">swipe down to drop</div>
+				<img class="mobile-controls-description__logo swipe-hands" src="images/swipe-hands.png" alt="No image">
+				
+				<div class="mobile-controls-description__text">touch to rotate</div>
+				<img class="mobile-controls-description__logo touch-hand" src="images/touch-hand.png" alt="No image">
+
+			</div>
+			
 			<!-- игровое поле -->
 			<canvas id="canvas1" class="game-field"></canvas>
 			<canvas id="canvas2" class="help-block"></canvas>

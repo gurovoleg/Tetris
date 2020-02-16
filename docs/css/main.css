@@ -34,10 +34,6 @@ body {
 	min-width: 30px;
 }
 
-.settings__control--show {
-	display: block;
-}
-
 .settings__control--on {
 	color: #009688;
 }
@@ -132,6 +128,7 @@ body {
 	color:#f44336;
 	text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 0px 5px 5px rgba(0, 0, 0, 0.5);
 	position: absolute;
+	z-index: 2;
 	top: 50%; left: 50%;
 	transform: translate(-50%, -50%) scale(0); /* убираем */
 	transition: all 0.2s ease-in;
@@ -144,7 +141,7 @@ body {
 
 
 .mobile-controls {
-	display: none;
+	display: flex;
 	z-index: 2;
 	position: fixed;
 	top: 0; bottom: 0;
@@ -155,30 +152,62 @@ body {
 	/* используем в паре с mobile-controls_button для отображения направляющих */
 }
 
-.mobile-controls--show {
-	display: flex
+.mobile-controls--show-lines .mobile-controls_button--left {
+	border-right: 1px dashed rgba(128, 128, 128, 0.2);
 }
 
-.mobile-controls--show-lines .mobile-controls_button {
-	border: 1px dashed rgba(128, 128, 128, 0.2);
-}
-
-.mobile-controls_button--left, .mobile-controls_button--right {
-	width: 20%;
-}
-
-.mobile-controls_middle {
-	width: 60%;
+.mobile-controls--show-lines .mobile-controls_button--right {
+	border-left: 1px dashed rgba(128, 128, 128, 0.2);
 }
 
 .mobile-controls_button--rotate {
 	height: 80%;
 }
 
+.mobile-controls--show-lines .mobile-controls_button--rotate {
+	border-bottom: 1px dashed rgba(128, 128, 128, 0.2);
+}
+
 .mobile-controls_button--down {
 	height: 20%;
 }
 
+.mobile-controls-description {
+	display: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 30px;
+}
+
+.mobile-controls-description__text {
+	font-size: 12px;
+	color: rgba(128, 128, 128, 0.2);	
+}
+
+.mobile-controls-description__title {
+	font-size: 14px;
+	color: rgba(128, 128, 128, 0.2);	
+	margin-bottom: 5px;
+}
+
+.mobile-controls-description__logo {
+	width: 80px;
+	height: auto;
+}
+
+.touch-hand {
+	opacity: 0.12;
+}
+
+.swipe-hands {
+	opacity: 0.14;	
+}
+
+.d-block {
+	display: block;
+}
 
 /* Media queries */
 @media (min-width: 992px) {
