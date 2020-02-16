@@ -154,14 +154,10 @@ body {
 }
 
 .mobile-controls_button {
-	display: none;
+	display: block;
 	position: relative;
 	font-size: 24px;
 	color: rgba(128, 128, 128, 0.2);
-}
-
-.mobile-controls--show-lines .mobile-controls_button {
-	display: block;
 }
 
 .mobile-controls--show-lines .mobile-controls_button--left {
@@ -182,6 +178,15 @@ body {
 
 .mobile-controls_button--down {
 	height: 20%;
+}
+
+
+[class^='fas fa-chevron'] {
+	display: none;
+}
+
+.mobile-controls--show-lines .mobile-controls_button > [class^="fas fa-chevron"] {
+	display: block;
 }
 
 .mobile-controls_button--left .fa-chevron-left,
