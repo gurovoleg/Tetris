@@ -218,15 +218,15 @@ body {
 }
 
 .mobile-controls-description__text {
-	font-size: 12px;
-	margin-bottom: 5px;
+	font-size: 10px;
+	margin-bottom: 15px;
 	color: rgba(128, 128, 128, 0.2);	
 }
 
 .mobile-controls-description__title {
 	font-size: 14px;
 	color: rgba(128, 128, 128, 0.2);	
-	margin-bottom: 5px;
+	margin-bottom: 25px;
 }
 
 .mobile-controls-description__logo {
@@ -257,6 +257,8 @@ body {
 
 @media (min-width: 576px) {
 	.mobile-controls_button {font-size: 30px;}
+	.mobile-controls-description__text {font-size: 12px;}
+	.mobile-controls-description__title {font-size: 14px;}
 }
 
 
