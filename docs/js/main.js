@@ -207,6 +207,11 @@ function startGame () {
 
 // Обновляем экран
 function tick (timestamp) {
+
+	clearCanvas1() // очищаем игровое поле
+	drawBlock() // отрисовываем фигуру
+	drawState() // отрисовываем всю карту
+
 	if (timestamp >= durationTime) {
 		const blockCopy = block.getCopy()
 		blockCopy.y ++
@@ -252,10 +257,6 @@ function tick (timestamp) {
 
 	}
 
-	clearCanvas1() // очищаем игровое поле
-	drawBlock() // отрисовываем фигуру
-	drawState() // отрисовываем всю карту
-	
 	requestId = requestAnimationFrame(tick)
 }
 

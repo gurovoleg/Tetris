@@ -99,7 +99,6 @@ onSwipeHandler({
 
 // Звук
 volumeControl.addEventListener('click', (e) => {
-	console.log(volumeControl)
 	e.stopPropagation()
 	volumeEnabled = !volumeEnabled
 	updateState()
@@ -107,7 +106,6 @@ volumeControl.addEventListener('click', (e) => {
 
 // Подсказка
 helpControl.addEventListener('click', (e) => {
-	console.log(helpControl)
 	e.stopPropagation()
 	showHelpBlock = !showHelpBlock
 	updateState()
@@ -115,7 +113,6 @@ helpControl.addEventListener('click', (e) => {
 
 // Направляющие областей управления
 layoutControl.addEventListener('click', (e) => {
-	console.log(layoutControl)
 	e.stopPropagation()
 	showControlsLayout = !showControlsLayout
 	updateState()
