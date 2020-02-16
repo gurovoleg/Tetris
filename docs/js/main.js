@@ -190,7 +190,7 @@ function drawBlock () {
 // Запуск
 function startGame () {
 	startSound.play()
-	mobileControls.classList.add('mobile-controls--show')
+	mobileControls.classList.add('mobile-controls--above')
 	notification.classList.remove('notification--show')
 	score = 0
 	level = 1
@@ -333,7 +333,7 @@ function endGame () {
   vibrate(2, 300)
   gameoverSound.play()
 	showNotification('Game over')
-	mobileControls.classList.remove('mobile-controls--show')
+	mobileControls.classList.remove('mobile-controls--above')
 	gameStatus = null
 	startButton.textContent = 'start'
 }

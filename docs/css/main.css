@@ -128,7 +128,7 @@ body {
 	color:#f44336;
 	text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 0px 5px 5px rgba(0, 0, 0, 0.5);
 	position: absolute;
-	z-index: 2;
+	z-index: 1;
 	top: 50%; left: 50%;
 	transform: translate(-50%, -50%) scale(0); /* убираем */
 	transition: all 0.2s ease-in;
@@ -143,10 +143,14 @@ body {
 /* мобильное управление */
 .mobile-controls {
 	display: flex;
-	z-index: 2;
+	z-index: 0;
 	position: fixed;
 	top: 0; bottom: 0;
 	width: 100%;
+}
+
+.mobile-controls--above {
+	z-index: 2;
 }
 
 .mobile-controls_button {
