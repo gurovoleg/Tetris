@@ -86,12 +86,14 @@ function setControlsSize () {
 function drawHelpBlock () {
 	context2.clearRect(0, 0, canvas2.width, canvas2.height)
 	
-	const nextBlockCopy = nextBlock.getCopy()
-	nextBlockCopy.x = 1
-	nextBlockCopy.y = 1
-	for (const part of nextBlockCopy.getIncludedParts()) {
-		context2.fillStyle = nextBlockCopy.color
-		context2.fillRect(part.x * canvas2.width / 4 + PADDING , part.y * canvas2.height / 4 + PADDING, canvas2.width / 4 - PADDING, canvas2.height / 4 - PADDING)
+	if (showHelpBlock) {
+		const nextBlockCopy = nextBlock.getCopy()
+		nextBlockCopy.x = 1
+		nextBlockCopy.y = 1
+		for (const part of nextBlockCopy.getIncludedParts()) {
+			context2.fillStyle = nextBlockCopy.color
+			context2.fillRect(part.x * canvas2.width / 4 + PADDING , part.y * canvas2.height / 4 + PADDING, canvas2.width / 4 - PADDING, canvas2.height / 4 - PADDING)
+		}
 	}
 }
 
@@ -197,10 +199,8 @@ function startGame () {
 	block = getBlock(getRandomFrom(START_BLOCKS), getRandomFrom(BLOCK_COLORS))
 	nextBlock = getBlock(getRandomFrom(START_BLOCKS), getRandomFrom(BLOCK_COLORS))
 
-	// Показываем подсказку
-	if (showHelpBlock) {
-		drawHelpBlock() 	
-	}
+	// Блок с подсказкой
+	drawHelpBlock() 	
 
 	requestAnimationFrame(tick)
 }
@@ -239,12 +239,8 @@ function tick (timestamp) {
 			block = nextBlock
 			nextBlock = getBlock(getRandomFrom(START_BLOCKS), getRandomFrom(BLOCK_COLORS))
 
-			// Показываем подсказку (следующий блок)
-			if (showHelpBlock) {
-				drawHelpBlock() 	
-			} else {
-				canvas2.width |= 0
-			}
+			// Блок с подсказкой (следующий блок)
+			drawHelpBlock() 	
 			
 			// Проверяем есть ли место и заканчиваем игру
 			if (!canBlockExist(block)) {
