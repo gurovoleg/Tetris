@@ -230,7 +230,7 @@ body {
 }
 
 .mobile-controls-description__logo {
-	width: 80px;
+	width: 60px;
 	height: auto;
 }
 
@@ -264,6 +264,10 @@ body {
 	.mobile-controls-description__title {
 		font-size: 14px;
 		margin-bottom: 25px;
+	}
+	.mobile-controls-description__logo {
+		width: 80px;
+		height: auto;
 	}
 }
 
