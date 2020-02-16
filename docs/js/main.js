@@ -13,7 +13,7 @@ let nextBlock // следующая фигура (для подсказки)
 let score = 0 // счет
 let level = 1 // уровень
 let showHelpBlock = true // индикатор подсказки
-let showControlsLayout = false // индикатор вспомогательных линии областей управления 
+let showControlsLayout = true // индикатор вспомогательных линии областей управления 
 let requestId = null // для отмены анимации
 let gameStatus = null // 0 - paused, 1 - active
 let fieldWidth // ширина блока игрового поля
