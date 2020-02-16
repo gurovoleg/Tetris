@@ -139,11 +139,7 @@ function updateControlView (control, className, value) {
 
 // Очищаем поле
 function clearCanvas1 () {
-	// context.fillStyle = CANVAS_BACKGROUND
-	// context.rect(0, 0, canvas1.width, canvas1.height)	
-	// context.fill()
 	context.clearRect(0, 0, canvas1.width, canvas1.height)
-	// canvas1.width |= 0 тоде самое что canvas1.width = canvas1.width
 }
 
 // Рисуем фрагмент поля (часть фигуры)
@@ -253,6 +249,7 @@ function tick (timestamp) {
 		}	
 		
 		durationTime = timestamp + getDurationTime()
+
 	}
 
 	clearCanvas1() // очищаем игровое поле

@@ -78,7 +78,7 @@ function fallDown () {
 		const blockCopy = block.getCopy()
 		blockCopy['y'] += 2
 		if (canBlockExist(blockCopy)) {
-			block = blockCopy
+			block['y'] += 1
 			moveSound.play()
 		} else {
 			clearInterval(intervalId)
@@ -91,8 +91,8 @@ onSwipeHandler({
 	element: rotateControl,
 	left: moveLeft,
 	right: moveRight,
-	noswipe: rotate,
-	down: fallDown
+	down: fallDown,
+	noswipe: rotate
 })
 
 // Управление настройками
