@@ -107,7 +107,7 @@ function updateState () {
 		levelElement.classList.add('info-level--scale')
 		setTimeout(() => {
 			levelSound.play()
-			showNotification('уровень +1 !', 500)
+			showNotification('уровень +1!', 800)
 			levelElement.classList.remove('info-level--scale')	
 		},500)
 		level = newLevel
@@ -229,10 +229,10 @@ function tick (timestamp) {
 		    vibrate(1, 300)
 		    clearSound.play()
 	    	if (linesCount > 2) {
-	        showNotification(`${linesCount} строки! Круто!`, 700)
+	        showNotification(`${linesCount} строки! Круто!`, 800)
 	        gameoverSound.play()
 	    	} else if (linesCount > 1) {
-	        showNotification(`${linesCount} строки! Отлично!`, 700)
+	        showNotification(`${linesCount} строки! Отлично!`, 800)
 	    	}
 			}
 					
