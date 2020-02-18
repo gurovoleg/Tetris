@@ -116,7 +116,7 @@ helpControl.addEventListener('click', (e) => {
 	updateState()
 })
 
-// Направляющие областей управления
+// Направляющие областей управления 
 layoutControl.addEventListener('click', (e) => {
 	showControlsLayout = !showControlsLayout
 	updateState()

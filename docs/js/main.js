@@ -87,7 +87,7 @@ function setControlsSize () {
 function drawHelpBlock () {
 	context2.clearRect(0, 0, canvas2.width, canvas2.height)
 	
-	if (showHelpBlock) {
+	if (showHelpBlock && gameStatus) {
 		const nextBlockCopy = nextBlock.getCopy()
 		nextBlockCopy.x = 1
 		nextBlockCopy.y = 1
