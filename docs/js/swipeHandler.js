@@ -1,7 +1,8 @@
-let initialPoint
-let finalPoint
+function onSwipeHandler ({ element, left, right, up, down, rotate }) {
+	let initialPoint
+	let finalPoint
+	const startFn = fn => typeof fn === 'function' ? fn() : null
 
-function onSwipeHandler ({ element, left, right, up, down, noswipe }) {
 	element.addEventListener('touchstart', function(event) {
 		event.preventDefault()
 		event.stopPropagation()
@@ -18,19 +19,19 @@ function onSwipeHandler ({ element, left, right, up, down, noswipe }) {
 		if (xAbs > 20 || yAbs > 20) {
 			if (xAbs > yAbs) {
 				if (finalPoint.pageX < initialPoint.pageX){
-					if (typeof left === 'function') left() // СВАЙП ВЛЕВО
+					startFn(left) // СВАЙП ВЛЕВО
 				} else {
-					if (typeof right === 'function') right() // СВАЙП ВПРАВО
+					startFn(right) // СВАЙП ВПРАВО
 				}
 			} else {
 				if (finalPoint.pageY < initialPoint.pageY){
-					if (typeof up === 'function') up() // СВАЙП ВВЕРХ
+					startFn(up) // СВАЙП ВВЕРХ
 				} else {
-					if (typeof down === 'function') down() // СВАЙП ВНИЗ
+					startFn(down) // СВАЙП ВНИЗ
 				}
 			}
 		} else {
-			if (typeof noswipe === 'function') noswipe()
+			startFn(rotate)
 		}
 	}, false)	
 }

@@ -98,7 +98,7 @@ onSwipeHandler({
 	left: moveLeft,
 	right: moveRight,
 	down: fallDown,
-	noswipe: rotate
+	rotate: rotate
 })
 
 // Управление настройками

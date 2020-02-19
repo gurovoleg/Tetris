@@ -26,6 +26,7 @@ const notification =  document.querySelector('#notification')
 const startButton =  document.querySelector('#start')
 const mobileControls =  document.querySelector('#mobileControls')
 const mobileControlsDescription =  document.querySelector('#mobileControlsDescription')
+const middleControl =  document.querySelector('#middle')
 const leftControl =  document.querySelector('#left')
 const rightControl =  document.querySelector('#right')
 const rotateControl =  document.querySelector('#rotate')
@@ -69,13 +70,12 @@ function init () {
 function setCanvasSize (element, offset = 20) {
 	const screenHeight = document.documentElement.clientHeight
 	const coords = element.getBoundingClientRect()
-	element.height = screenHeight - coords.y - offset
+	element.height = screenHeight - coords.top - offset
 	element.width = parseInt(element.height / 2)
 }
 
 // Задаем размеры элементов управления
 function setControlsSize () {
-	const middleControl =  mobileControls.querySelector('#middle')
 	const screenWidth = document.documentElement.clientWidth
 
 	middleControlWidth = canvas1.width * 0.7
