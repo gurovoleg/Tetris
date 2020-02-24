@@ -25,13 +25,6 @@ let volumeEnabled = true
 //   }    
 // }
 
-const clearSound = 'sounds/cleared2.mp3'
-const levelSound = 'sounds/levelUp1.mp3'
-const moveSound = 'sounds/moved.wav'
-const rotateSound = 'sounds/rotate3.wav'
-const gameoverSound = 'sounds/welldone.ogg'
-const startSound = 'sounds/start1.ogg'
-
 const sounds = {
   clear: 'sounds/cleared2.mp3',
   level: 'sounds/levelUp1.mp3',
@@ -42,7 +35,10 @@ const sounds = {
 }
 
 const audioElement = document.querySelector("#audio")
-const audioContext = new AudioContext() // создаем аудио контекст
+
+window.AudioContext = window.AudioContext || window.webkitAudioContext
+
+const audioContext = new window.AudioContext() // создаем аудио контекст
 const source = audioContext.createMediaElementSource(audioElement) // подключаем источник звука (HTML-элемент audio)
 source.connect(audioContext.destination) // подключаем узел вывода звука (получатель) 
 
@@ -54,6 +50,6 @@ function playSound (sound) {
   if (sounds[sound]) {
     console.log('playSound', sounds[sound])
     audioElement.src = sounds[sound]
-    audioElement.play()
+    volumeEnabled ? audioElement.play() : null
   }
 }
