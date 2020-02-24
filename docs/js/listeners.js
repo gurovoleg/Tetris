@@ -22,7 +22,8 @@ function setBlockPosition (coord, value) {
 		blockCopy[coord] += value
 		if (canBlockExist(blockCopy)) {
 			block = blockCopy
-			moveSound.play()
+			// moveSound.play()
+			playSound('move')	
 		}
 	}
 }
@@ -34,7 +35,8 @@ const moveDown = () => setBlockPosition('y', 1)
 const rotate = () => {
 	if (gameStatus === 1 && block && canBlockExist(block.getNextBlock())) {
 		block = block.getNextBlock() 
-		rotateSound.play()
+		// rotateSound.play()
+		playSound('rotate')
 	}
 }
 

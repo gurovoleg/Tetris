@@ -106,7 +106,8 @@ function updateState () {
 	if (newLevel > level) {
 		levelElement.classList.add('info-level--scale')
 		setTimeout(() => {
-			levelSound.play()
+			// levelSound.play()
+			playSound('level')
 			showNotification('уровень +1!', 800)
 			levelElement.classList.remove('info-level--scale')	
 		},500)
@@ -189,7 +190,8 @@ function drawBlock () {
 
 // Запуск
 function startGame () {
-	startSound.play()
+	// startSound.play()
+	playSound('start')
 	mobileControls.classList.add('mobile-controls--above')
 	notification.classList.remove('notification--show')
 	score = 0
@@ -227,10 +229,12 @@ function tick (timestamp) {
 			const linesCount = clearLines()
 			if (linesCount > 0) {
 		    vibrate(1, 300)
-		    clearSound.play()
+		    // clearSound.play()
+		    playSound('clear')
 	    	if (linesCount > 2) {
 	        showNotification(`${linesCount} строки! Круто!`, 800)
-	        gameoverSound.play()
+	        // gameoverSound.play()
+	        playSound('applause')
 	    	} else if (linesCount > 1) {
 	        showNotification(`${linesCount} строки! Отлично!`, 800)
 	    	}
@@ -331,7 +335,8 @@ function vibrate(number = 1, value = 200) {
 // Конец игры
 function endGame () {
   vibrate(2, 300)
-  gameoverSound.play()
+  // gameoverSound.play()
+  playSound('applause')
 	showNotification('Game over')
 	mobileControls.classList.remove('mobile-controls--above')
 	gameStatus = null

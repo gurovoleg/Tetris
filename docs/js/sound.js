@@ -1,27 +1,70 @@
 let volumeEnabled = true
 
-// const clearSound = new sound('sounds/laser1.mp3')
-const clearSound = new sound('sounds/cleared2.mp3')
-const levelSound = new sound('sounds/levelUp1.mp3')
-const moveSound = new sound('sounds/moved.wav')
-const rotateSound = new sound('sounds/rotate3.wav')
-const gameoverSound = new sound('sounds/welldone.ogg')
-const startSound = new sound('sounds/start1.ogg')
+// const clearSound = new sound('sounds/cleared2.mp3')
+// const levelSound = new sound('sounds/levelUp1.mp3')
+// const moveSound = new sound('sounds/moved.wav')
+// const rotateSound = new sound('sounds/rotate3.wav')
+// const gameoverSound = new sound('sounds/welldone.ogg')
+// const startSound = new sound('sounds/start1.ogg')
 
 
-function sound(src) {
-  this.sound = document.createElement("audio")
-  this.sound.src = src
-  this.sound.setAttribute("preload", "auto")
-  this.sound.setAttribute("controls", "none")
-  this.sound.style.display = "none"
-  document.body.appendChild(this.sound)
-  this.play = function(){
-    if (volumeEnabled) {
-      this.sound.play()  
-    }        
+// function sound(src) {
+//   this.sound = document.createElement("audio")
+//   this.sound.src = src
+//   this.sound.setAttribute("preload", "auto")
+//   this.sound.setAttribute("controls", "none")
+//   this.sound.style.display = "none"
+//   document.body.appendChild(this.sound)
+//   this.play = function(){
+//     if (volumeEnabled) {
+//       this.sound.play()  
+//     }        
+//   }
+//   this.stop = function(){
+//     this.sound.pause()
+//   }    
+// }
+
+const clearSound = 'sounds/cleared2.mp3'
+const levelSound = 'sounds/levelUp1.mp3'
+const moveSound = 'sounds/moved.wav'
+const rotateSound = 'sounds/rotate3.wav'
+const gameoverSound = 'sounds/welldone.ogg'
+const startSound = 'sounds/start1.ogg'
+
+const sounds = {
+  clear: 'sounds/cleared2.mp3',
+  level: 'sounds/levelUp1.mp3',
+  move: 'sounds/moved.wav',
+  rotate: 'sounds/rotate3.wav',
+  applause: 'sounds/welldone.ogg',
+  start: 'sounds/start1.ogg',
 }
-  this.stop = function(){
-    this.sound.pause()
-  }    
+
+const audioElement = document.querySelector("#audio")
+audioElement.src = 'sounds/start1.ogg'
+// создаем аудио контекст
+const audioContext = new AudioContext()
+ // подключаем источник звука (HTML-элемент audio)
+const source = audioContext.createMediaElementSource(audioElement)
+source.connect(audioContext.destination)
+
+// audioElement.addEventListener('play', function (e) {
+//   console.log('play', e)
+//   if (audioContext.state === 'suspended') {
+//     audioContext.resume()
+//   }
+//   this.play()
+// })
+
+function playSound (sound) {
+  if (audioContext.state === 'suspended') {
+    audioContext.resume()
+  }
+
+  if (sounds[sound]) {
+    console.log('playSound', sounds[sound])
+    audioElement.src = sounds[sound]
+    audioElement.play()
+  }
 }
