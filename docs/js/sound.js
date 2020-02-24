@@ -42,24 +42,13 @@ const sounds = {
 }
 
 const audioElement = document.querySelector("#audio")
-audioElement.src = 'sounds/start1.ogg'
-// создаем аудио контекст
-const audioContext = new AudioContext()
- // подключаем источник звука (HTML-элемент audio)
-const source = audioContext.createMediaElementSource(audioElement)
-source.connect(audioContext.destination)
-
-// audioElement.addEventListener('play', function (e) {
-//   console.log('play', e)
-//   if (audioContext.state === 'suspended') {
-//     audioContext.resume()
-//   }
-//   this.play()
-// })
+const audioContext = new AudioContext() // создаем аудио контекст
+const source = audioContext.createMediaElementSource(audioElement) // подключаем источник звука (HTML-элемент audio)
+source.connect(audioContext.destination) // подключаем узел вывода звука (получатель) 
 
 function playSound (sound) {
   if (audioContext.state === 'suspended') {
-    audioContext.resume()
+    audioContext.resume() // делаем доступным, так как по умолчанию выключен (может быть включен ТОЛЬКО после взаимодействия с пользователем)
   }
 
   if (sounds[sound]) {

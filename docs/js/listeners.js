@@ -86,7 +86,8 @@ function fallDown () {
 			blockCopy['y'] += 2
 			if (canBlockExist(blockCopy)) {
 				block['y'] += 1
-				moveSound.play()
+				// moveSound.play()
+				playSound('move')
 			} else {
 				clearInterval(intervalId)
 			}
