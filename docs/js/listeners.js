@@ -22,8 +22,7 @@ function setBlockPosition (coord, value) {
 		blockCopy[coord] += value
 		if (canBlockExist(blockCopy)) {
 			block = blockCopy
-			// moveSound.play()
-			playSound('move')	
+			moveSound.play()
 		}
 	}
 }
@@ -35,8 +34,7 @@ const moveDown = () => setBlockPosition('y', 1)
 const rotate = () => {
 	if (gameStatus === 1 && block && canBlockExist(block.getNextBlock())) {
 		block = block.getNextBlock() 
-		// rotateSound.play()
-		playSound('rotate')
+		rotateSound.play()
 	}
 }
 
@@ -86,8 +84,7 @@ function fallDown () {
 			blockCopy['y'] += 2
 			if (canBlockExist(blockCopy)) {
 				block['y'] += 1
-				// moveSound.play()
-				playSound('move')
+				moveSound.play()
 			} else {
 				clearInterval(intervalId)
 			}
