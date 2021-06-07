@@ -1,18 +1,18 @@
 let volumeEnabled = true
 
-// const clearSound = new sound('sounds/cleared2.mp3')
-// const levelSound = new sound('sounds/levelUp1.mp3')
-// const moveSound = new sound('sounds/moved.wav')
-// const rotateSound = new sound('sounds/rotate3.wav')
-// const gameoverSound = new sound('sounds/welldone.ogg')
-// const startSound = new sound('sounds/start1.ogg')
+const clearSound = new sound('sounds/cleared2.mp3')
+const levelSound = new sound('sounds/levelUp1.mp3')
+const moveSound = new sound('sounds/moved.wav')
+const rotateSound = new sound('sounds/rotate3.wav')
+const gameoverSound = new sound('sounds/welldone.ogg')
+const startSound = new sound('sounds/start1.ogg')
 
-const clearSound = new Audio('sounds/cleared2.mp3')
-const levelSound = new Audio('sounds/levelUp1.mp3')
-const moveSound = new Audio('sounds/moved.wav')
-const rotateSound = new Audio('sounds/rotate3.wav')
-const gameoverSound = new Audio('sounds/welldone.ogg')
-const startSound = new Audio('sounds/start1.ogg')
+// const clearSound = new Audio('sounds/cleared2.mp3')
+// const levelSound = new Audio('sounds/levelUp1.mp3')
+// const moveSound = new Audio('sounds/moved.wav')
+// const rotateSound = new Audio('sounds/rotate3.wav')
+// const gameoverSound = new Audio('sounds/welldone.ogg')
+// const startSound = new Audio('sounds/start1.ogg')
 
 
 function sound(src) {
