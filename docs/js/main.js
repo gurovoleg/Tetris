@@ -149,6 +149,7 @@ function clearCanvas1 () {
 
 // Рисуем фрагмент поля (часть фигуры)
 function drawField (x, y, color) {
+	// console.log(color)
 	context.fillStyle = color
 	context.fillRect(x * fieldWidth + PADDING , y * fieldHeight + PADDING, fieldWidth - 2 * PADDING, fieldHeight - 2 * PADDING)
 }
